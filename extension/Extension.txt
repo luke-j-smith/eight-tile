@@ -1,0 +1,53 @@
+Extension work: 
+
+1) I have changed the way in which unsolvable puzzles are 
+   found. The new method assesses the starting board after
+   it has been read from a file (assuming the file is 
+   suitable). 
+   
+   This method was deliberately not included in the first
+   part of the assignment as I discovered it on the 
+   internet. (Instead I used the structure of the program
+   to determine if unsolvable although could be very slow!)
+   
+   This method uses the total number of inversions to 
+   determine whether the puzzle is solvable. If the total
+   number is even, the the puzzle is solvable.
+   
+   - First we write the initial board out linearly and 
+     ignore the blank.
+     For example: 5, 2, 8, 4, 1, 7, 3, 6. 
+     
+     The number of inversions of a tile is defined as the
+     amount of subsequent tiles that have a lower value. 
+     
+     In our example, 4 has 2 inversions as both 1 and 3 are
+     subsequent tiles. 
+     
+     Therefore, the total number of inversions in our 
+     example is: 4 + 1 + 5 + 2 + 0 + 2 + 0 + 0 = 14. 
+     Thus, this puzzle is solvable. 
+     
+2) The main improvement in speed has occurred as a result 
+   of the implementation of the A* search algorithm
+   (https://en.wikipedia.org/wiki/A*_search_algorithm).
+   
+   After experimentation, I have used the Manhattan 
+   priority function.
+   
+   "Manhattan priority function: The sum of the distances
+   (sum of the vertical and horizontal distance) from the
+   blocks to their goal positions, plus the number of moves
+   made so far to get to the state."
+   (https://www.cs.princeton.edu/courses/archive/spr10/cos226/assignments/8puzzle.html)
+   
+   When a new board is created, its position in the queue
+   is determined using the priority function. The lower the
+   Manhattan number, the higher its priority in the queue 
+   (ie, the closer to the front of the queue it should be). 
+   
+   nb: No board is deleted as we need to ensure no existing
+   boards are added to the queue. Therefore, even if a new,
+   child, board has the lowest priority out of all boards, 
+   it is placed directly after its parent board (so that 
+   it will be evaluated as the solution next). 
